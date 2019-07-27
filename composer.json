@@ -19,14 +19,14 @@
             "registration.php"
         ],
         "psr-4": {
-            "Magebild\\DefualtText\\": ""
+            "Magebild\\DefaultText\\": ""
         }
     },
     "extra": {
         "map": [
             [
                 "*",
-                "Magebild/DefualtText"
+                "Magebild/DefaultText"
             ]
         ]
     }
