@@ -69,10 +69,12 @@ class Output
         if ($attributeName === Product::ATTRIBUTE_TARGET) {
             $attributeId = $this->getAttributeId();
             $cmsBlockId = $this->getSelectedOptionId($product, $attributeId);
+
             if ($cmsBlockId !== null) {
                 $block = $this->blockRepository->getById($cmsBlockId);
                 $matches = [];
-                preg_match_all("/<div\s[^>]*class=\"content-home block-img-content\"[^>]*>(.*)<\/div>/", $modifiedResult, $matches);
+                $regexp = '<div\s[^>]*class=\"content-home block-img-content\"[^>]*>(.*)<\/div>';
+                preg_match_all("/$regexp/siU", $modifiedResult, $matches, PREG_SET_ORDER);
                 if (count($matches) == 0) {
                     $modifiedResult .= $this->escaper->escapeHtml($block->getContent(), self::ALLOWED_TAGS);
                 }
