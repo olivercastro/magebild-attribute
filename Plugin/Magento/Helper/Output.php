@@ -9,7 +9,7 @@ namespace Magebild\DefaultText\Plugin\Magento\Helper;
 use Magebild\DefaultText\Model\Source\Attribute\Campaign;
 use Magebild\DefaultText\Plugin\Magento\Catalog\Model\Product;
 use Magento\Cms\Api\BlockRepositoryInterface;
-use Magento\Eav\Model\AttributeRepository;
+use Magento\Eav\Api\AttributeRepositoryInterface;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\Escaper;
 
@@ -33,13 +33,13 @@ class Output
      * Product constructor.
      * @param Escaper $escaper
      * @param BlockRepositoryInterface $blockRepository
-     * @param AttributeRepository $attributeRepository
+     * @param AttributeRepositoryInterface $attributeRepository
      * @param ResourceConnection $resource
      */
     public function __construct(
         Escaper $escaper,
         BlockRepositoryInterface $blockRepository,
-        AttributeRepository $attributeRepository,
+        AttributeRepositoryInterface $attributeRepository,
         ResourceConnection $resource
     ) {
         $this->escaper = $escaper;
@@ -103,7 +103,7 @@ class Output
     {
         $value = null;
         /** @var \Magento\Framework\DB\Adapter\Pdo\Mysql $connection */
-        $connection = $this->resource->getConnection('core_read');
+        $connection = $this->resource->getConnection();
         $table = $this->resource->getTableName(self::CATALOG_PRODUCT_ENTITY_INT_TABLE);
         $select = $connection->select()
             ->from($table)
